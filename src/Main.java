@@ -9,8 +9,10 @@ public class Main {
         //Adiciona um elemento na listagem
         listaEncadeada.adicionar("elemento2", 1);
 
-        System.out.println("Tamanho lista: "+ listaEncadeada.getTamanho());
+        System.out.println("\nTamanho lista: "+ listaEncadeada.getTamanho());
 
+
+        System.out.println("\nPercorrer elementos:");
         listaEncadeada.exibirElementos();
     }
 }

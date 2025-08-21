@@ -37,14 +37,19 @@ public class ListaEncadeada<T>{
             No<T> novoNo = new No<>(elemento);
 
             No<T> no = this.inicio;
-            for(int i=0; i < this.tamanho; i++){
-                System.out.print(no.getElemento());
-                System.out.print(" - ");
+            for(int i=0; i <= this.tamanho; i++){
+                System.out.print("["+i+"] ");
+
+                //Se chegou na posição que vai adicionar
                 if(i == posicao) {
-                    System.out.println("ADICIONAR AQUI!!!!");
+                    no.setProximo(novoNo);
+                    System.out.println("adicionado com sucesso");
                     break;
                 }
+                System.out.print(no.getElemento());
+                System.out.print(" - ");
                 no = no.getProximo();
+                System.out.print("(Próximo: "+no.getElemento()+")");
             }
             this.ultimo = novoNo;
             this.inicio.setProximo(this.ultimo);
