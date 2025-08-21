@@ -3,15 +3,31 @@ public class Main {
 
         ListaEncadeada listaEncadeada = new ListaEncadeada();
 
-        //Adiciona o primeiro elemento da listagem
+
+        System.out.println("\nIniciando lista com 'elemento1'");
         listaEncadeada.adicionarInicio("elemento1");
 
-        //Adiciona um elemento na listagem
+        System.out.println("Percorrer elementos 1:");
+        listaEncadeada.exibirElementos();
+
+        System.out.println("\nAdicionando 'elemento2' na posição 1");
         listaEncadeada.adicionar("elemento2", 1);
 
-        System.out.println("\nTamanho lista: "+ listaEncadeada.getTamanho());
-
-        System.out.println("\nPercorrer elementos:");
+        System.out.println("Percorrer elementos 2:");
         listaEncadeada.exibirElementos();
+
+        System.out.println("\nAdicionando 'elemento3' na posição 1");
+        listaEncadeada.adicionar("elemento3", 1);
+
+        System.out.println("Percorrer elementos 3:");
+        listaEncadeada.exibirElementos();
+
+        System.out.println("\nAdicionando 'elemento4' na posição 1");
+        listaEncadeada.adicionar("elemento4", 1);
+
+        System.out.println("Percorrer elementos fim:");
+        listaEncadeada.exibirElementos();
+
+        System.out.println("\nTamanho lista: "+ listaEncadeada.getTamanho());
     }
 }

@@ -35,14 +35,48 @@ public class ListaEncadeada<T>{
         else {
             No<T> novoNo = new No<>(elemento);
 
-            No<T> no = this.inicio;
+            No<T> noAnterior = this.inicio;
             for(int i=0; i <= this.tamanho; i++){
+                No<T> noProximo = noAnterior.getProximo();
                 //Se chegou na posição anterior a que vai adicionar
                 if(i == posicao-1) {
-                    no.setProximo(novoNo);
+                    if(noProximo != null) {
+                        novoNo.setProximo(noProximo);
+                    }
+                    noAnterior.setProximo(novoNo);
                     break;
                 }
-                no = no.getProximo();
+                noAnterior = noAnterior.getProximo();
+            }
+            this.tamanho++;
+        }
+    }
+
+    public void remover(T elemento, int posicao) {
+        //Lista vazia
+        if(this.tamanho == 0){
+            System.out.println("\nA lista está vazia!");
+        }
+        //Posicao fora do limite
+        else if (posicao > this.tamanho) {
+            System.out.println("\nA posição não pode ser maior que a quantidade de itens na lista");
+        }
+        //Adiciona o elemento
+        else {
+            No<T> novoNo = new No<>(elemento);
+
+            No<T> noAnterior = this.inicio;
+            for(int i=0; i <= this.tamanho; i++){
+                No<T> noProximo = noAnterior.getProximo();
+                //Se chegou na posição anterior a que vai adicionar
+                if(i == posicao-1) {
+                    if(noProximo != null) {
+                        novoNo.setProximo(noProximo);
+                    }
+                    noAnterior.setProximo(novoNo);
+                    break;
+                }
+                noAnterior = noAnterior.getProximo();
             }
             this.tamanho++;
         }
@@ -51,10 +85,21 @@ public class ListaEncadeada<T>{
     public void exibirElementos() {
         No<T> no = this.inicio;
         for(int i=0; i < this.tamanho; i++){
-            System.out.print(no.getElemento());
-            System.out.print(" - ");
+            //Exibe o elemento e o proximo
+            System.out.print("[" + no.getElemento() + ",");
+
             no = no.getProximo();
+
+            if(no != null) {
+                System.out.print(no.getElemento());
+            }
+            else {
+                System.out.print("~vazio~");
+            }
+
+            System.out.print("] - ");
         }
+        System.out.println();
     }
 
     //  NOVAS FUNÇÕES:
