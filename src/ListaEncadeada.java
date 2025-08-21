@@ -15,9 +15,58 @@ public class ListaEncadeada<T>{
             this.inicio = novoNo;
             this.ultimo = novoNo;
 
-        }else {
-            No<T> novoNo = new No<>(elemento, this.inicio);
+            this.tamanho++;
         }
-        this.tamanho++;
+        else {
+            System.out.println("\nLista encadeada já possui itens");
+        }
     }
+
+    public void adicionar(T elemento, int posicao) {
+        //Lista vazia
+        if(this.tamanho == 0){
+            adicionarInicio(elemento);
+        }
+        //Posicao fora do limite
+        else if (posicao > this.tamanho) {
+            System.out.println("\nA posição não pode ser maior que a quantidade de itens na lista");
+        }
+        //Adiciona o elemento
+        else {
+            //inicio --- novo -> ultimo
+            No<T> novoNo = new No<>(elemento);
+
+            No<T> no = this.inicio;
+            for(int i=0; i < this.tamanho; i++){
+                System.out.print(no.getElemento());
+                System.out.print(" - ");
+                if(i == posicao) {
+                    System.out.println("ADICIONAR AQUI!!!!");
+                    break;
+                }
+                no = no.getProximo();
+            }
+            this.ultimo = novoNo;
+            this.inicio.setProximo(this.ultimo);
+
+            this.tamanho++;
+        }
+    }
+
+    public void exibirElementos() {
+        No<T> no = this.inicio;
+        for(int i=0; i < this.tamanho; i++){
+            System.out.print(no.getElemento());
+            System.out.print(" - ");
+            no = no.getProximo();
+        }
+    }
+
+    //  NOVAS FUNÇÕES:
+    //    Adicionar na posição
+    //    Busca No
+    //    Remover primeiro elemento
+    //    Remover último elemento
+    //    Remover algum elemento em outra posição
+    //    Exibir elementos
 }
