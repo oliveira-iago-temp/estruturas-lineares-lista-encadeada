@@ -8,7 +8,7 @@ public class ListaEncadeada<T>{
         return tamanho;
     }
 
-    public void adicionarInicio(T elemento ) {
+    public void adicionarInicio(T elemento) {
 
         if(this.tamanho == 0){
             No<T> novoNo = new No<>(elemento);
@@ -33,27 +33,17 @@ public class ListaEncadeada<T>{
         }
         //Adiciona o elemento
         else {
-            //inicio --- novo -> ultimo
             No<T> novoNo = new No<>(elemento);
 
             No<T> no = this.inicio;
             for(int i=0; i <= this.tamanho; i++){
-                System.out.print("["+i+"] ");
-
-                //Se chegou na posição que vai adicionar
-                if(i == posicao) {
+                //Se chegou na posição anterior a que vai adicionar
+                if(i == posicao-1) {
                     no.setProximo(novoNo);
-                    System.out.println("adicionado com sucesso");
                     break;
                 }
-                System.out.print(no.getElemento());
-                System.out.print(" - ");
                 no = no.getProximo();
-                System.out.print("(Próximo: "+no.getElemento()+")");
             }
-            this.ultimo = novoNo;
-            this.inicio.setProximo(this.ultimo);
-
             this.tamanho++;
         }
     }
@@ -69,9 +59,10 @@ public class ListaEncadeada<T>{
 
     //  NOVAS FUNÇÕES:
     //    Adicionar na posição
+    //    Exibir elementos
     //    Busca No
     //    Remover primeiro elemento
     //    Remover último elemento
     //    Remover algum elemento em outra posição
-    //    Exibir elementos
+
 }

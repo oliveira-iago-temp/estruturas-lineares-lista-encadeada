@@ -11,7 +11,6 @@ public class Main {
 
         System.out.println("\nTamanho lista: "+ listaEncadeada.getTamanho());
 
-
         System.out.println("\nPercorrer elementos:");
         listaEncadeada.exibirElementos();
     }
