@@ -26,4 +26,16 @@ public class No<T> {
     public void setProximo(No<T> proximo) {
         this.proximo = proximo;
     }
+
+    //Exibe o elemento e o proximo
+    public void imprimir() {
+        System.out.print("[" + this.elemento + ",");
+
+        if (this.proximo != null) {
+            System.out.print(this.proximo.getElemento());
+        } else {
+            System.out.print("~vazio~");
+        }
+        System.out.print("] - ");
+    }
 }

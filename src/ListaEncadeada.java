@@ -35,79 +35,123 @@ public class ListaEncadeada<T>{
         else {
             No<T> novoNo = new No<>(elemento);
 
-            No<T> noAnterior = this.inicio;
-            for(int i=0; i <= this.tamanho; i++){
-                No<T> noProximo = noAnterior.getProximo();
-                //Se chegou na posição anterior a que vai adicionar
-                if(i == posicao-1) {
-                    if(noProximo != null) {
-                        novoNo.setProximo(noProximo);
+            //Se o elemento adicionado deve ficar na primeira posição
+            if(posicao == 0) {
+                No<T> primeiroNo = this.inicio;
+                novoNo.setProximo(primeiroNo);
+                this.inicio = novoNo;
+            }
+            else {
+                No<T> noAnterior = this.inicio;
+                for(int i=0; i <= this.tamanho; i++){
+                    No<T> noProximo = noAnterior.getProximo();
+
+                    //Se chegou na posição anterior a que vai adicionar
+                    if(i == posicao-1) {
+                        if(noProximo != null) {
+                            novoNo.setProximo(noProximo);
+                        }
+                        noAnterior.setProximo(novoNo);
+
+                        //Se for o ultimo item da lista
+                        if(posicao==this.tamanho-1) {
+                            this.ultimo = novoNo;
+                        }
+                        break;
                     }
-                    noAnterior.setProximo(novoNo);
-                    break;
+                    noAnterior = noAnterior.getProximo();
                 }
-                noAnterior = noAnterior.getProximo();
             }
             this.tamanho++;
         }
     }
 
-    public void remover(T elemento, int posicao) {
+    public void remover(int posicao) {
         //Lista vazia
         if(this.tamanho == 0){
-            System.out.println("\nA lista está vazia!");
+            System.out.println("\nA lista está vazia");
         }
         //Posicao fora do limite
         else if (posicao > this.tamanho) {
             System.out.println("\nA posição não pode ser maior que a quantidade de itens na lista");
         }
-        //Adiciona o elemento
+        //Remove o elemento
         else {
-            No<T> novoNo = new No<>(elemento);
-
-            No<T> noAnterior = this.inicio;
-            for(int i=0; i <= this.tamanho; i++){
-                No<T> noProximo = noAnterior.getProximo();
-                //Se chegou na posição anterior a que vai adicionar
-                if(i == posicao-1) {
-                    if(noProximo != null) {
-                        novoNo.setProximo(noProximo);
-                    }
-                    noAnterior.setProximo(novoNo);
-                    break;
-                }
-                noAnterior = noAnterior.getProximo();
+            //Se o elemento a ser removido é da primeira posição
+            if(posicao == 0) {
+                No<T> primeiroNo = this.inicio;
+                this.inicio = primeiroNo.getProximo();
             }
-            this.tamanho++;
+            else {
+                No<T> noAnterior = this.inicio;
+                for(int i=0; i <= this.tamanho; i++){
+                    No<T> noProximo = noAnterior.getProximo();
+
+                    //Se chegou na posição anterior a que vai remover
+                    if(i == posicao-1) {
+                        if(noProximo != null) {
+                            noAnterior.setProximo(noProximo.getProximo());
+                        }
+
+                        //Se for o ultimo item da lista
+                        if(posicao==this.tamanho-1) {
+                            this.ultimo = noAnterior;
+                        }
+                        break;
+                    }
+                    noAnterior = noAnterior.getProximo();
+                }
+            }
+            this.tamanho--;
+        }
+    }
+
+    public void removerPrimeiraPosicao() {
+        remover(0);
+    }
+
+    public void removerUltimaPosicao() {
+        remover(this.tamanho-1);
+    }
+
+    public No<T> buscar(int posicao) {
+        if(this.tamanho == 0){
+            System.out.println("Lista vazia");
+            return null;
+        }
+        else {
+            No<T> no = this.inicio;
+            for (int i = 0; i < this.tamanho; i++) {
+                if(i == posicao) {
+                    return no;
+                }
+                no = no.getProximo();
+            }
+            System.out.println("Não encontrado");
+            return null;
         }
     }
 
     public void exibirElementos() {
-        No<T> no = this.inicio;
-        for(int i=0; i < this.tamanho; i++){
-            //Exibe o elemento e o proximo
-            System.out.print("[" + no.getElemento() + ",");
-
-            no = no.getProximo();
-
-            if(no != null) {
-                System.out.print(no.getElemento());
-            }
-            else {
-                System.out.print("~vazio~");
-            }
-
-            System.out.print("] - ");
+        if(this.tamanho == 0){
+            System.out.println("Lista vazia");
         }
-        System.out.println();
+        else {
+            No<T> no = this.inicio;
+            for (int i = 0; i < this.tamanho; i++) {
+                //Exibe o elemento e o proximo
+                no.imprimir();
+                no = no.getProximo();
+            }
+            System.out.println();
+        }
     }
 
     //  NOVAS FUNÇÕES:
-    //    Adicionar na posição
-    //    Exibir elementos
-    //    Busca No
-    //    Remover primeiro elemento
-    //    Remover último elemento
-    //    Remover algum elemento em outra posição
-
+    //    [OK] Adicionar na posição ok
+    //    [OK] Exibir elementos ok
+    //    [OK] Busca No
+    //    [OK] Remover primeiro elemento
+    //    [OK] Remover último elemento
+    //    [OK] Remover algum elemento em outra posição
 }
